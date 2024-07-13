@@ -47,6 +47,7 @@ namespace SDA_WEB_API.BusinessLayer.Services
                     existingItem.Name = payload.Name;
                     existingItem.Size = payload.Size;
                     existingItem.Category = payload.Category;
+                    existingItem.Studio = payload.Studio;
 
                     context.VideoGames.Update(existingItem);
                     await context.SaveChangesAsync();

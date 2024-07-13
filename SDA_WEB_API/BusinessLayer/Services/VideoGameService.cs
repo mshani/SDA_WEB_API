@@ -51,6 +51,50 @@ namespace SDA_WEB_API.BusinessLayer.Services
                 throw;
             }
         }
+
+        public async Task<List<VideoGame>?> GetByFilter(
+            string? name, 
+            string? category, 
+            int? size, 
+            string? publisher)
+        {
+            try
+            {
+                var query = context.VideoGames.Include(x => x.Publisher).AsQueryable();
+                if (!string.IsNullOrEmpty(name))
+                {
+                    query = query
+                        .Where(x => 
+                        x.Name != null &&
+                        x.Name.ToUpper().Trim().Contains(name.ToUpper().Trim()));
+                }
+                if (!string.IsNullOrEmpty(category))
+                {
+                    query = query
+                        .Where(x =>
+                        x.Category != null && 
+                        x.Category.ToUpper().Trim().Contains(category.ToUpper().Trim()));
+                }
+                if (size != null)
+                {
+                    query = query
+                        .Where(x => x.Size == size);
+                }
+                if (!string.IsNullOrEmpty(publisher))
+                {
+                    query = query.Where(x => 
+                    x.Publisher != null &&
+                    x.Publisher.Name != null &&
+                    x.Publisher.Name.ToUpper().Trim().Contains(publisher.ToUpper().Trim()));
+                }
+                var result = query.ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public async Task<VideoGame?> Update(int id, VideoGameDTO payload)
         {
             try

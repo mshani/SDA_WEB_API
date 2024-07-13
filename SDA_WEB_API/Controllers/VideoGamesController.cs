@@ -34,6 +34,21 @@ namespace SDA_WEB_API.Controllers
             }
         }
 
+        [HttpGet()]
+        public async Task<ActionResult> GetByFilter(
+            [FromQuery] string? name, 
+            [FromQuery] string? category, 
+            [FromQuery] int? size, 
+            [FromQuery] string? publisher)
+        {
+            var result = await videoGameService.GetByFilter(name, category, size, publisher);
+            if (result == null) { return new NoContentResult(); }
+            else
+            {
+                return new OkObjectResult(result);
+            }
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] VideoGameDTO payload)
         {

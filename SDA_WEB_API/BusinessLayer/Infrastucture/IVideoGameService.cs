@@ -9,5 +9,6 @@ namespace SDA_WEB_API.BusinessLayer.Infrastucture
         Task<VideoGame?> GetById(int id);
         Task<VideoGame?> Update(int id, VideoGameDTO payload);
         Task<bool> Delete(int id);
+        Task<List<VideoGame>?> GetByFilter(string? name, string? category, int? size, string? publisher);
     }
 }

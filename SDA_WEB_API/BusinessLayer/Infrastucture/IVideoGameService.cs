@@ -7,7 +7,7 @@ namespace SDA_WEB_API.BusinessLayer.Infrastucture
     {
         Task<VideoGame> Create(VideoGameDTO payload);
         Task<VideoGame?> GetById(int id);
-        Task<VideoGame?> Update(int id, VideoGame payload);
+        Task<VideoGame?> Update(int id, VideoGameDTO payload);
         Task<bool> Delete(int id);
     }
 }

@@ -35,7 +35,7 @@ namespace SDA_WEB_API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody] VideoGame payload)
+        public async Task<ActionResult> Update(int id, [FromBody] VideoGameDTO payload)
         {
             var result = await videoGameService.Update(id, payload);
             if (result == null) { 

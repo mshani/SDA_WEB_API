@@ -47,7 +47,7 @@ namespace SDA_WEB_API.BusinessLayer.Services
                 throw;
             }
         }
-        public async Task<VideoGame?> Update(int id, VideoGame payload)
+        public async Task<VideoGame?> Update(int id, VideoGameDTO payload)
         {
             try
             {
@@ -58,10 +58,11 @@ namespace SDA_WEB_API.BusinessLayer.Services
                     existingItem.Size = payload.Size;
                     existingItem.Category = payload.Category;
                     existingItem.Studio = payload.Studio;
+                    existingItem.ModifiedTime = DateTime.UtcNow;
 
                     context.VideoGames.Update(existingItem);
                     await context.SaveChangesAsync();
-                    return payload;
+                    return existingItem;
                 }
                 return null;
             }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SDA_WEB_API.DataLayer;
 
@@ -11,9 +12,11 @@ using SDA_WEB_API.DataLayer;
 namespace SDA_WEB_API.Migrations
 {
     [DbContext(typeof(VideoGameStoreContext))]
-    partial class VideoGameStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20240713112342_ConnectPublisherToVideoGames")]
+    partial class ConnectPublisherToVideoGames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

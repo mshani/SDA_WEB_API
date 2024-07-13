@@ -11,6 +11,6 @@ namespace SDA_WEB_API.BusinessLayer.DTOs
         [Required]
         public string? Category { get; set; }
         [Required]
-        public string? Studio { get; set; }
+        public int? PublisherId { get; set; }
     }
 }

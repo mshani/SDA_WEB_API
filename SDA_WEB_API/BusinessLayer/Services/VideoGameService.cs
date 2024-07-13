@@ -21,7 +21,7 @@ namespace SDA_WEB_API.BusinessLayer.Services
                 {
                     Name = payload.Name,
                     Size = payload.Size,
-                    Studio = payload.Studio,
+                    PublisherId = payload.PublisherId,
                     Category = payload.Category,
                     CreateTime = DateTime.UtcNow,
                 };
@@ -39,7 +39,11 @@ namespace SDA_WEB_API.BusinessLayer.Services
         {
             try
             {
-                var result = await context.VideoGames.FirstOrDefaultAsync(x => x.Id == id);
+                var result = await 
+                    context.VideoGames
+                    .Include(x => x.Publisher)
+                    .FirstOrDefaultAsync(x => x.Id == id);
+                
                 return result;
             }
             catch (Exception ex)
@@ -57,7 +61,7 @@ namespace SDA_WEB_API.BusinessLayer.Services
                     existingItem.Name = payload.Name;
                     existingItem.Size = payload.Size;
                     existingItem.Category = payload.Category;
-                    existingItem.Studio = payload.Studio;
+                    existingItem.PublisherId = payload.PublisherId;
                     existingItem.ModifiedTime = DateTime.UtcNow;
 
                     context.VideoGames.Update(existingItem);

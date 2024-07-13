@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SDA_WEB_API.DataLayer.Models
 {
@@ -14,5 +15,7 @@ namespace SDA_WEB_API.DataLayer.Models
         [Required]
         [MaxLength(20)]
         public string? Phone { get; set; }
+        [JsonIgnore]
+        public List<VideoGame>? VideoGames { get; set; }
     }
 }

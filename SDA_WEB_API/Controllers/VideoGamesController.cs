@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SDA_WEB_API.BusinessLayer.DTOs;
 using SDA_WEB_API.BusinessLayer.Infrastucture;
 using SDA_WEB_API.DataLayer.Models;
 
@@ -16,7 +17,7 @@ namespace SDA_WEB_API.Controllers
             this.videoGameService = videoGameService;
         }
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] VideoGame payload)
+        public async Task<ActionResult> Post([FromBody] VideoGameDTO payload)
         {
             var result = await videoGameService.Create(payload);
             return new OkObjectResult(result);

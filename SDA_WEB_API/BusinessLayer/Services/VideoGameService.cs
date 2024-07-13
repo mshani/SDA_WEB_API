@@ -2,6 +2,7 @@
 using SDA_WEB_API.DataLayer;
 using SDA_WEB_API.DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using SDA_WEB_API.BusinessLayer.DTOs;
 
 namespace SDA_WEB_API.BusinessLayer.Services
 {
@@ -12,13 +13,22 @@ namespace SDA_WEB_API.BusinessLayer.Services
         {
             this.context = context;
         }
-        public async Task<VideoGame> Create(VideoGame payload)
+        public async Task<VideoGame> Create(VideoGameDTO payload)
         {
             try
             {
-                context.VideoGames.Add(payload);
+                var item = new VideoGame
+                {
+                    Name = payload.Name,
+                    Size = payload.Size,
+                    Studio = payload.Studio,
+                    Category = payload.Category,
+                    CreateTime = DateTime.UtcNow,
+                };
+
+                context.VideoGames.Add(item);
                 await context.SaveChangesAsync();
-                return payload;
+                return item;
             }
             catch (Exception ex)
             {

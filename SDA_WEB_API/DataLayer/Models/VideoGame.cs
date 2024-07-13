@@ -12,6 +12,7 @@ namespace SDA_WEB_API.DataLayer.Models
         [MaxLength(100)]
         public string? Category { get; set; }
         public string? Studio {  get; set; }
-        //public Publisher Publisher { get; set; }
+        public DateTime? CreateTime { get; set; }
+        public DateTime? ModifiedTime { get; set; }
     }
 }

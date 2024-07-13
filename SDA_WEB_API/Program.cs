@@ -21,6 +21,7 @@ namespace SDA_WEB_API
             builder.Services.AddEndpointsApiExplorer();
 
             builder.Services.AddTransient<IPublisherService, PublisherService>();
+            builder.Services.AddTransient<IVideoGameService, VideoGameService>();
 
             builder.Services.AddSwaggerGen();
             var app = builder.Build();

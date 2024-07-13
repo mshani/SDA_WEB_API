@@ -1,35 +1,35 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SDA_WEB_API.BusinessLayer.Infrastucture;
+﻿using SDA_WEB_API.BusinessLayer.Infrastucture;
 using SDA_WEB_API.DataLayer;
 using SDA_WEB_API.DataLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SDA_WEB_API.BusinessLayer.Services
 {
-    public class PublisherService : IPublisherService
+    public class VideoGameService : IVideoGameService
     {
         private readonly VideoGameStoreContext context;
-        public PublisherService(VideoGameStoreContext context)
+        public VideoGameService(VideoGameStoreContext context)
         {
             this.context = context;
         }
-        public async Task<Publisher> Create(Publisher publisher)
+        public async Task<VideoGame> Create(VideoGame payload)
         {
             try
             {
-                context.Publishers.Add(publisher);
+                context.VideoGames.Add(payload);
                 await context.SaveChangesAsync();
-                return publisher;
+                return payload;
             }
             catch (Exception ex)
             {
                 throw;
             }
         }
-        public async Task<Publisher?> GetById(int id)
+        public async Task<VideoGame?> GetById(int id)
         {
             try
             {
-                var result = await context.Publishers.FirstOrDefaultAsync(x => x.Id == id);
+                var result = await context.VideoGames.FirstOrDefaultAsync(x => x.Id == id);
                 return result;
             }
             catch (Exception ex)
@@ -37,20 +37,20 @@ namespace SDA_WEB_API.BusinessLayer.Services
                 throw;
             }
         }
-        public async Task<Publisher?> Update(int id, Publisher publisher)
+        public async Task<VideoGame?> Update(int id, VideoGame payload)
         {
             try
             {
-                var existingItem = await context.Publishers.FirstOrDefaultAsync(x => x.Id == id);
+                var existingItem = await context.VideoGames.FirstOrDefaultAsync(x => x.Id == id);
                 if (existingItem != null)
                 {
-                    existingItem.Name = publisher.Name;
-                    existingItem.Adress = publisher.Adress;
-                    existingItem.Phone = publisher.Phone;
+                    existingItem.Name = payload.Name;
+                    existingItem.Size = payload.Size;
+                    existingItem.Category = payload.Category;
 
-                    context.Publishers.Update(existingItem);
+                    context.VideoGames.Update(existingItem);
                     await context.SaveChangesAsync();
-                    return publisher;
+                    return payload;
                 }
                 return null;
             }
@@ -63,10 +63,10 @@ namespace SDA_WEB_API.BusinessLayer.Services
         {
             try
             {
-                var existingItem = await context.Publishers.FirstOrDefaultAsync(x => x.Id == id);
+                var existingItem = await context.VideoGames.FirstOrDefaultAsync(x => x.Id == id);
                 if (existingItem != null)
                 {
-                    context.Publishers.Remove(existingItem);
+                    context.VideoGames.Remove(existingItem);
                     await context.SaveChangesAsync();
                     return true;
                 }

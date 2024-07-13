@@ -9,8 +9,9 @@ namespace SDA_WEB_API.DataLayer.Models
         [MaxLength(255)]
         public string? Name { get; set; }
         public int Size { get; set; }
-        public string? Studio { get; set; }
         [MaxLength(100)]
         public string? Category { get; set; }
+        public int PublisherId {  get; set; }
+        public Publisher Publisher { get; set; }
     }
 }
